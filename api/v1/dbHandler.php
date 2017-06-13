@@ -17,6 +17,17 @@ class DbHandler {
         $r = $this->conn->query($query.' LIMIT 1') or die($this->conn->error.__LINE__);
         return $result = $r->fetch_assoc();    
     }
+	
+	public function getMultipleRecords($query) {
+        $r = $this->conn->query($query) or die($this->conn->error.__LINE__);
+        $arr = array();
+        if($r->num_rows > 0) {
+	       while($row = $r->fetch_assoc()) {
+		      $arr[] = $row;	
+	       }
+        }
+        return $arr;    
+    }
     /**
      * Creating new record
      */

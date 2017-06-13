@@ -32,7 +32,7 @@ app.config(['$routeProvider',
 			.when('/listuser', {
 			title: 'User List',
 			templateUrl: 'directives/listuser/listuser.html',
-			controller: 'userCtrl'
+			controller: 'userCrtl'
 		})
             .otherwise({
                 redirectTo: '/login'

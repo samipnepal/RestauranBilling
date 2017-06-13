@@ -22,7 +22,7 @@
         <div class="col-md-12" ng-show="filteredItems > 0">
             <table class="table table-striped table-bordered">
             <thead>
-            <th>User ID&nbsp;<a ng-click="sort_by('uid');"><i class="glyphicon glyphicon-sort"></i></a></th>
+            <th>User ID&nbsp;<a ng-click="sort_by('id');"><i class="glyphicon glyphicon-sort"></i></a></th>
             <th>First Name&nbsp;<a ng-click="sort_by('fname');"><i class="glyphicon glyphicon-sort"></i></a></th>
             <th>Last Name&nbsp;<a ng-click="sort_by('lname');"><i class="glyphicon glyphicon-sort"></i></a></th>
             <th>Email&nbsp;<a ng-click="sort_by('email');"><i class="glyphicon glyphicon-sort"></i></a></th>
@@ -30,7 +30,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="data in filtered = (list | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-                    <td>{{data.uid}}</td>
+                    <td>{{data.id}}</td>
                     <td>{{data.fname}}</td>
                     <td>{{data.lname}}</td>
                     <td>{{data.email}}</td>

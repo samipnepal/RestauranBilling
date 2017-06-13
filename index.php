@@ -45,5 +45,5 @@
 <script src="app/directives.js"></script>
 <script src="app/authCtrl.js"></script>
 <script src="directives/navBar/navBar.js"></script>
-<script src="controllers/userCtrl.js"></script>
+<script src="controllers/usersCrtl.js"></script>
 </html>
