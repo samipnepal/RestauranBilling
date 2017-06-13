@@ -1,0 +1,100 @@
+<div class="panel panel-info" ng-controller="authCtrl as a">
+    <div class="panel-heading">
+        <h3 class="panel-title">User Profile - <strong>{{profile.fname}} {{profile.lname}}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center"> <img ng-if="profile.gender=='Male'" alt="User Pic" src="https://s-media-cache-ak0.pinimg.com/736x/98/1e/ce/981eceb633f4d3a7c7d086792efc988b--cartoon-boy-cartoon-people.jpg" class="img-circle img-responsive">
+                <img ng-if="profile.gender=='Female'" alt="User Pic" src="https://s-media-cache-ak0.pinimg.com/736x/52/94/84/52948454cc81c843e9c8acade753fdca.jpg" class="img-circle img-responsive" style="max-height: 350px">
+            </div>
+
+            <div class=" col-md-9 col-lg-9 ">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>First Name</td>
+                            <td ng-if="!isProfileEdit">{{profile.fname}}</td>
+                            <td ng-if="isProfileEdit"><input ng-model="profile.fname" type="text" value="{{profile.fname}}"></td>
+                        </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td ng-if="!isProfileEdit">{{profile.lname}}</td>
+                            <td ng-if="isProfileEdit"><input ng-model="profile.lname" type="text" value="{{profile.lname}}"></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td ng-if="!isProfileEdit">{{profile.email}}</td>
+                            <td ng-if="isProfileEdit"><input ng-model="profile.email" type="text" value="{{profile.email}}"></td>
+                        </tr>
+                        <tr>
+                            <td>Created date:</td>
+                            <td>{{profile.createdAt}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td ng-if="!isProfileEdit">{{profile.phone}}</td>
+                            <td ng-if="isProfileEdit"><input ng-model="profile.phone" type="text" value="{{profile.phone}}"></td>
+                        </tr>
+
+                        <tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td ng-if="!isProfileEdit">{{profile.gender}}</td>
+                                <td ng-if="isProfileEdit"><select ng-model="profile.gender" type="text" >
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>State:</td>
+                                <td ng-if="!isProfileEdit">{{profile.state}}</td>
+                                <td ng-if="isProfileEdit"><input ng-model="profile.state" type="text" value="{{profile.state}}"></td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td ng-if="!isProfileEdit">{{profile.city}}</td>
+                                <td ng-if="isProfileEdit"><input ng-model="profile.city" type="text" value="{{profile.city}}"></td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td ng-if="!isProfileEdit">{{profile.address}}</td>
+                                <td ng-if="isProfileEdit"><input ng-model="profile.address" type="text" value="{{profile.address}}"></td>
+                            </tr>
+                    </tbody>
+                </table>
+
+                <a ng-if="isProfileEdit" ng-click="editProfile(profile);" class="btn btn-primary">Save</a>
+                  <a ng-show="isProfileEdit" ng-click="isProfileEdit=false"  class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <a ng-if="isAdmin" data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+        <span class="pull-right">
+                            <a ng-click="isProfileEdit=true" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a data-original-title="Remove this user" data-toggle="modal" data-target="#confirm" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                        </span>
+    </div>
+
+    <div id="confirm" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">User Deletion Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to delete user with email {{profile.email}} ? </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteUser(profile.uid);">Confirm</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

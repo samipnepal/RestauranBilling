@@ -1,0 +1,23 @@
+<nav class="navbar navbar-inverse" ng-init="page='home'">
+			<ul class="nav navbar-nav">
+				<div class="navbar-header">
+					<a href="#" class="navbar-brand" ng-click="page='home'">Demo</a>
+				</div>
+				<li ng-if="authenticated"><a href="#listuser">UserList</a></li>
+                <li ng-if="authenticated"><a href="#addproduct">Add Product</a></li>
+			</ul>
+
+<div ng-controller="authCtrl">
+			<ul class="nav navbar-nav navbar-right" ng-show="!authenticated">
+				<li  ><a href="#signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="#login"><span class="glyphicon glyphicon-log-in" > </span> Login</a></li>
+
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right" ng-show="authenticated">
+			<li  ng-model="login" ng-click="getProfile(email);"><a href="#userprofile"><span class="glyphicon glyphicon-user"></span> {{fname}}</a></li>
+			<li><a ng-click="logout();"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+			</ul>
+</div>
+		</nav>
