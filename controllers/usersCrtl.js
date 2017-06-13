@@ -28,5 +28,8 @@ app.controller('userCrtl', function ($scope, $http, $timeout, $location, $rootSc
         $scope.predicate = predicate;
         $scope.reverse = !$scope.reverse;
     };
+    $scope.getUserProfile =function(profile) {
+        $rootScope.$emit("getProfileMethod", profile.email);
+    }
 
 });

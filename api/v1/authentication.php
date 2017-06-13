@@ -89,10 +89,4 @@ $app->get('/logout', function() {
     echoResponse(200, $response);
 });
 
-$app->get('/listUser', function() {
-    $response = array();
-    $db = new DbHandler();
-    $user = $db->getMultipleRecords("select * from users");
-    echoResponse(200, $user);
-});
 ?>

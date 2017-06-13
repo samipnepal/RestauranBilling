@@ -7,16 +7,12 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Demo</title>
 	<!-- Bootstrap -->
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
 	<link href="css/toaster.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<style>
-		a {
-			color: orange;
-		}
-	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]><link href= "css/bootstrap-theme.css"rel= "stylesheet" >
@@ -46,4 +42,6 @@
 <script src="app/authCtrl.js"></script>
 <script src="directives/navBar/navBar.js"></script>
 <script src="controllers/usersCrtl.js"></script>
+    <script src="controllers/profileCtrl.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
 </html>

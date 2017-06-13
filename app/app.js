@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'toaster']);
+var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'toaster', 'ui.bootstrap']);
 
 app.config(['$routeProvider',
   function ($routeProvider) {
@@ -34,6 +34,11 @@ app.config(['$routeProvider',
 			templateUrl: 'directives/listuser/listuser.html',
 			controller: 'userCrtl'
 		})
+        .when('/userprofile', {
+            title: 'User Profile',
+            templateUrl:'directives/userprofile/userprofile.html',
+            controller: 'profileCrtl'
+        })
             .otherwise({
                 redirectTo: '/login'
             });
@@ -47,6 +52,12 @@ app.config(['$routeProvider',
                     $rootScope.id = results.id;
                     $rootScope.fname = results.fname;
                     $rootScope.email = results.email;
+                    var nextUrl = next.$$route.originalPath;
+                    if (nextUrl == '/signup' || nextUrl == '/login') {
+                        $location.path("/dashboard");
+                    } else if(nextUrl == '/userprofile') {
+                        $rootScope.$emit("getProfileMethod", $rootScope.email);
+                    }
                 } else {
                     var nextUrl = next.$$route.originalPath;
                     if (nextUrl == '/signup' || nextUrl == '/login') {
