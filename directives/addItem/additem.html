@@ -11,21 +11,21 @@
 						<br/>
 						<form name="itemForm" class="form-horizontal" role="form">
 							<div class="form-group">
-								<label class="col-sm-5 control-label no-padding-right" for="iname">Item Name</label>
+								<label class="col-sm-5 control-label no-padding-right" for="itemname">Item Name</label>
 								<div class="col-sm-7">
 									<span class="block input-icon input-icon-right">
-                                        <input type="text" class="form-control" placeholder="Item Name" name="iname" ng-model="item.iname" ng-minlength="3" required/>
-                                        <small class="errorMessage" data-ng-show="itemForm.iname.$dirty && itemForm.iname.$error.required"> Enter Item Name.</small>
-                                    <small class="errorMessage" data-ng-show="itemForm.iname.$dirty && itemForm.iname.$error.minlength"> Invalid Item Name.</small>
+                                        <input type="text" class="form-control" placeholder="Item Name" name="itemname" ng-model="item.itemname" ng-minlength="3" required/>
+                                        <small class="errorMessage" data-ng-show="itemForm.itemname.$dirty && itemForm.itemname.$error.required"> Enter Item Name.</small>
+                                    <small class="errorMessage" data-ng-show="itemForm.itemname.$dirty && itemForm.itemname.$error.minlength"> Invalid Item Name.</small>
                                     </span>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-5 control-label no-padding-right" for="price">Price</label>
+								<label class="col-sm-5 control-label no-padding-right" for="rate">Rate</label>
 								<div class="col-sm-7">
 									<span class="block input-icon input-icon-right">
-                                        <input type="number" class="form-control" placeholder="Price" name="price" ng-model="item.price" required  />
-                                        <small class="errorMessage" data-ng-show="itemForm.price.$dirty && itemForm.price.$error.required"> Enter price.</small>
+                                        <input type="number" class="form-control" placeholder="Rate" name="rate" ng-model="item.rate" required  />
+                                        <small class="errorMessage" data-ng-show="itemForm.rate.$dirty && itemForm.rate.$error.required"> Enter rate.</small>
                                     </span>
 								</div>
 							</div>
@@ -33,23 +33,16 @@
 								<label class="col-sm-5 control-label no-padding-right" for="unit">Unit</label>
 								<div class="col-sm-7">
 									<span class="block input-icon input-icon-right">
-										<select ng-model="item.unit" ng-options="x for x in units">
+										<select ng-init="item.unit = units[0]" ng-model="item.unit" ng-options="x for x in units" style="color:black" class="form-control">
 </select>
-                                        <!--<select style="color:black" class="form-control" name="unit" ng-model="item.unit">
-										<option>Plate</option>
-										<option>Cup</option>
-										<option>Nos</option>
-										</select>-->
-                                    </span> required </div>
+                                    </span> </div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-5 control-label no-padding-right" for="email">Type</label>
 								<div class="col-sm-7">
 									<span class="block input-icon input-icon-right">
-                                        <select style="color:black" class="form-control" name="type" ng-model="item.type">
-										<option>Beverage</option>
-										<option>Starter</option>
-										</select>
+                                        <select ng-init="item.type = types[0]" ng-model="item.type" ng-options="x for x in types" style="color:black" class="form-control">
+</select>
                                     </span>
 								</div>
 							</div>
@@ -63,11 +56,11 @@
 								</div>
 							</div>
 
-					</div>
 					</form>
 				</div>
 			</div>
 		</div>
 
 	</div>
+</div>
 </div>
