@@ -44,4 +44,5 @@
 <script src="controllers/usersCrtl.js"></script>
     <script src="controllers/profileCtrl.js"></script>
     <script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
+	<script src="controllers/itemCtrl.js"></script>
 </html>

@@ -39,6 +39,11 @@ app.config(['$routeProvider',
             templateUrl:'directives/userprofile/userprofile.html',
             controller: 'profileCrtl'
         })
+		.when('/additem', {
+            title: 'Add Menu Item',
+            templateUrl:'directives/addItem/additem.html',
+            controller: 'itemCtrl'
+        })
             .otherwise({
                 redirectTo: '/login'
             });

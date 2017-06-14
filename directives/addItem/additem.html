@@ -1,0 +1,73 @@
+<div class="page-content">
+	<div class="row">
+		<div class="space-6"></div>
+		<div class="col-sm-6 col-sm-offset-1">
+			<div id="login-box" class="login-box visible widget-box no-border">
+				<div class="widget-body">
+					<div class="widget-main">
+						<h4 class="header blue lighter bigger text-center">
+                            Add Menu Item
+                        </h4>
+						<br/>
+						<form name="itemForm" class="form-horizontal" role="form">
+							<div class="form-group">
+								<label class="col-sm-5 control-label no-padding-right" for="iname">Item Name</label>
+								<div class="col-sm-7">
+									<span class="block input-icon input-icon-right">
+                                        <input type="text" class="form-control" placeholder="Item Name" name="iname" ng-model="item.iname" ng-minlength="3" required/>
+                                        <small class="errorMessage" data-ng-show="itemForm.iname.$dirty && itemForm.iname.$error.required"> Enter Item Name.</small>
+                                    <small class="errorMessage" data-ng-show="itemForm.iname.$dirty && itemForm.iname.$error.minlength"> Invalid Item Name.</small>
+                                    </span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-5 control-label no-padding-right" for="price">Price</label>
+								<div class="col-sm-7">
+									<span class="block input-icon input-icon-right">
+                                        <input type="number" class="form-control" placeholder="Price" name="price" ng-model="item.price" required  />
+                                        <small class="errorMessage" data-ng-show="itemForm.price.$dirty && itemForm.price.$error.required"> Enter price.</small>
+                                    </span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-5 control-label no-padding-right" for="unit">Unit</label>
+								<div class="col-sm-7">
+									<span class="block input-icon input-icon-right">
+										<select ng-model="item.unit" ng-options="x for x in units">
+</select>
+                                        <!--<select style="color:black" class="form-control" name="unit" ng-model="item.unit">
+										<option>Plate</option>
+										<option>Cup</option>
+										<option>Nos</option>
+										</select>-->
+                                    </span> required </div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-5 control-label no-padding-right" for="email">Type</label>
+								<div class="col-sm-7">
+									<span class="block input-icon input-icon-right">
+                                        <select style="color:black" class="form-control" name="type" ng-model="item.type">
+										<option>Beverage</option>
+										<option>Starter</option>
+										</select>
+                                    </span>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<span class="lbl col-sm-5"> </span>
+								<div class="col-sm-7">
+									<button type="submit" class="width-35 pull-right btn btn-sm btn-primary" ng-click="addItem(item)" data-ng-disabled="itemForm.$invalid">
+										Add Item
+									</button>
+								</div>
+							</div>
+
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -13,6 +13,7 @@ $user_id = NULL;
 
 require_once 'authentication.php';
 require_once 'users.php';
+require_once 'items.php';
 
 /**
  * Verifying required params posted or not
