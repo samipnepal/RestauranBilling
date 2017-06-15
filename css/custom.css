@@ -1,11 +1,11 @@
 body{
-	 background: -webkit-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* W3C */
-font-family: 'Raleway', sans-serif;
-	color: beige;
+	background: -webkit-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Chrome 10+, Saf5.1+ */
+  	background:    -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* FF3.6+ */
+  	background:     -ms-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* IE10 */
+  	background:      -o-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Opera 11.10+ */
+  	background:         linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* W3C */
+	font-family: 'Raleway', sans-serif;
+	color: black;
 }
 
 #login-box {
@@ -15,11 +15,19 @@ font-family: 'Raleway', sans-serif;
 .navbar-right {
 	padding-right: 40px;
 }
-.table, .modal{
+.modal {
+	background:    -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* FF3.6+ */
+  	background:     -ms-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* IE10 */
+	background:      -o-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Opera 11.10+ */
+	background:         linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* W3C */
+	font-family: 'Raleway', sans-serif;
 	color: black;
 }
-.table th {
-    color: aliceblue;
+#filtertable{
+	background-color: aliceblue;
+}
+#filtertable th, #filtertable tr {
+    color: black;
 }
 .well {
 	text-align: center;

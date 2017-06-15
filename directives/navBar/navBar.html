@@ -1,10 +1,10 @@
-<nav class="navbar navbar-inverse" ng-init="page='home'" ng-controller="userCrtl">
+<nav class="navbar navbar-inverse" ng-init="page='home'" >
 			<ul class="nav navbar-nav">
 				<div class="navbar-header">
 					<a href="#" class="navbar-brand" ng-click="page='home'">Demo</a>
 				</div>
-				<li ng-if="authenticated"><a href="#listuser">UserList</a></li>
-                <li ng-if="authenticated"><a href="#additem">Add Item</a></li>
+				<li ng-if="authenticated"><a href="#listuser">User List</a></li>
+				<li ng-if="authenticated"><a href="#itemslist">Item List</a></li>
 				<li ng-if="authenticated"><a href="#billing">Billing</a></li>
 			</ul>
 

@@ -10,8 +10,8 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
 	<link href="css/toaster.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/jquery-3.2.1.js"></script>
+  <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,6 +32,7 @@
 </body>
 <toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
 <!-- Libs -->
+
 <script src="js/angular.min.js"></script>
 <script src="js/angular-route.min.js"></script>
 <script src="js/angular-animate.min.js"></script>
@@ -45,4 +46,5 @@
     <script src="controllers/profileCtrl.js"></script>
     <script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
 	<script src="controllers/itemCtrl.js"></script>
+<script src="directives/addItem/additem.js"></script>
 </html>

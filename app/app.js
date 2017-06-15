@@ -44,6 +44,11 @@ app.config(['$routeProvider',
             templateUrl:'directives/addItem/additem.html',
             controller: 'itemCtrl'
         })
+		.when('/itemslist', {
+            title: 'Menu Item List',
+            templateUrl:'directives/itemlist/itemlist.html',
+            controller: 'itemCtrl'
+        })
             .otherwise({
                 redirectTo: '/login'
             });

@@ -25,4 +25,12 @@ $app->post('/addItem', function() use ($app) {
         echoResponse(201, $response);
     }
 });
+
+$app->get('/listItems', function() {
+    $response = array();
+    $db = new DbHandler();
+    $user = $db->getMultipleRecords("select * from menu");
+    echoResponse(200, $user);
+});
+
 ?>

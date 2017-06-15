@@ -1,17 +1,7 @@
-<div class="page-content">
-	<div class="row">
-		<div class="space-6"></div>
-		<div class="col-sm-6 col-sm-offset-1">
-			<div id="login-box" class="login-box visible widget-box no-border">
-				<div class="widget-body">
-					<div class="widget-main">
-						<h4 class="header blue lighter bigger text-center">
-                            Add Menu Item
-                        </h4>
-						<br/>
+
 						<form name="itemForm" class="form-horizontal" role="form">
 							<div class="form-group">
-								<label class="col-sm-5 control-label no-padding-right" for="itemname">Item Name</label>
+								<label class="col-sm-4 control-label no-padding-right" for="itemname">Item Name</label>
 								<div class="col-sm-7">
 									<span class="block input-icon input-icon-right">
                                         <input type="text" class="form-control" placeholder="Item Name" name="itemname" ng-model="item.itemname" ng-minlength="3" required/>
@@ -21,7 +11,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-5 control-label no-padding-right" for="rate">Rate</label>
+								<label class="col-sm-4 control-label no-padding-right" for="rate">Rate</label>
 								<div class="col-sm-7">
 									<span class="block input-icon input-icon-right">
                                         <input type="number" class="form-control" placeholder="Rate" name="rate" ng-model="item.rate" required  />
@@ -30,7 +20,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-5 control-label no-padding-right" for="unit">Unit</label>
+								<label class="col-sm-4 control-label no-padding-right" for="unit">Unit</label>
 								<div class="col-sm-7">
 									<span class="block input-icon input-icon-right">
 										<select ng-init="item.unit = units[0]" ng-model="item.unit" ng-options="x for x in units" style="color:black" class="form-control">
@@ -38,7 +28,7 @@
                                     </span> </div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-5 control-label no-padding-right" for="email">Type</label>
+								<label class="col-sm-4 control-label no-padding-right" for="email">Type</label>
 								<div class="col-sm-7">
 									<span class="block input-icon input-icon-right">
                                         <select ng-init="item.type = types[0]" ng-model="item.type" ng-options="x for x in types" style="color:black" class="form-control">
@@ -47,20 +37,4 @@
 								</div>
 							</div>
 
-							<div class="form-group">
-								<span class="lbl col-sm-5"> </span>
-								<div class="col-sm-7">
-									<button type="submit" class="width-35 pull-right btn btn-sm btn-primary" ng-click="addItem(item)" data-ng-disabled="itemForm.$invalid">
-										Add Item
-									</button>
-								</div>
-							</div>
-
 					</form>
-				</div>
-			</div>
-		</div>
-
-	</div>
-</div>
-</div>
