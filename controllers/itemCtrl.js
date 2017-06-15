@@ -1,4 +1,4 @@
-app.controller('itemCtrl', function ($scope, $http, $timeout, $location, $rootScope,$route, Data) {
+app.controller('itemCtrl', function ($scope, $http, $timeout, $location, $rootScope, $window, Data) {
 	$scope.units = ["Plate", "Cup", "Nos"];
     $scope.types = ["Beverage", "Starter", "Main Course", "Soups", "Thali", "Pizzas", "Burgers", "Meal", "Chinese","Snacks"];
 
@@ -8,13 +8,23 @@ app.controller('itemCtrl', function ($scope, $http, $timeout, $location, $rootSc
 		Data.post('addItem', {
             Item: item
         }).then(function (results) {
-            Data.toast(results);
             if (results.status == "success") {
-                $location.path('/itemslist');
-				$route.reload;
+                $window.location.reload();
             }
+            Data.toast(results);
         });
 	}
+    
+    $scope.deleteItem =  function(item) {
+        Data.post('deleteItem', {
+            Item: item
+        }).then(function (results) {
+            if (results.status == "success") {
+                $window.location.reload();
+            }
+            Data.toast(results);
+        });
+    }
 	Data.get('listItems').then(function (results) {
 		$scope.list = results;
 		$scope.currentPage = 1; //current page
