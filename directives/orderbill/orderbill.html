@@ -1,7 +1,8 @@
 <div class="well">
 	<h4>Order Bill</h4></div>
 <div class="row">
-	<div class="col-sm-3">
+	<div class="col-sm-6">
+	<div class="col-sm-6">
 
 		<form name="customerForm" class="form-horizontal" role="form">
 
@@ -35,7 +36,7 @@
 
 	</div>
 
-	<div class="col-sm-3">
+	<div class="col-sm-6">
 		<form name="orderForm" class="form-horizontal" role="form">
 		<div class="row">
 				<div class="form-group">
@@ -45,13 +46,28 @@
 						</select>
 					</div>
 				</div>
-			</div>
 			<div class="form-group">
-				<button class="btn btn-primary pull-right" ng-click="addItem(order);">Add</button></div>
+					<p class="col-sm-5 control-label no-padding-right" for="item">Item: </p>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" placeholder="Item" name="item" ng-model="order.item">
+					</div>
+				</div>
+			
+			<div class="form-group">
+					<p class="col-sm-5 control-label no-padding-right" for="quantity">Quantity: </p>
+					<div class="col-sm-7">
+						<input type="number" class="form-control" placeholder="Quantity" name="quantity" ng-model="order.quantity">
+					</div>
+				</div>
+			</div>
+			
 		</form>
 	</div>
 	
-	
+		<div class="form-group text-center">
+				<button class="btn btn-primary " ng-click="addItem(order);">Add Item</button></div>
+		
+</div>
 	
 	
 	
@@ -59,22 +75,23 @@
 		
 		<div class="well">
 	<h4> Bill Preview</h4></div>
-		
-			<p><span class="text-left">Customer Name: <strong>{{order.custname | uppercase}}</strong></span>
-			<span class="pull-right">Table Number: <strong>{{order.tableno}}</strong></span></p>
-		
+		<div id="billPreview">
+			<div id="orderTitle">
+			<span class="text-left">Customer Name: <strong>{{order.custname | uppercase}}</strong></span>
+			<span class="pull-right">Table Number: <strong>{{order.tableno}}</strong></span>
+		</div>
 		<table class="table table-responsive table-condensed" id ="filtertable">
     <thead>
       <tr>
         <th>Item</th>
-		  <th>Unit</th>
+		<th>Unit</th>
         <th>Rate</th>
 		<th>Quantity</th>
         <th>Total</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="x in billItems">
+      <tr ng-repeat="x in bill.items">
         <td>{{x.item}}</td>
 		<td>{{x.unit}}</td>
         <td>{{x.rate}}</td>
@@ -83,5 +100,7 @@
       </tr>
     </tbody>
   </table>
+			
+		</div>
 	</div>
 </div>

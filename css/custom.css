@@ -44,3 +44,13 @@ body{
 h5, p {
 	color: antiquewhite;
 }
+#billPreview{
+	background: white;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	padding: 10px;
+}
+
+#billPreview table{
+	border: none;
+}
