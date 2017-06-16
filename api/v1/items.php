@@ -33,4 +33,29 @@ $app->get('/listItems', function() {
     echoResponse(200, $user);
 });
 
+$app->get('/getTypes', function() {
+    $response = array();
+    $db = new DbHandler();
+    $user = $db->getMultipleRecords("select distinct type from menu");
+    echoResponse(200, $user);
+});
+
+$app->post('/deleteItem', function() use ($app) {
+    $response = array();
+    $r = json_decode($app->request->getBody());
+    $db = new DbHandler();
+    $itemid = $r->Item->itemid;
+	$result = $db->deleteRecord("delete from menu where itemid='$itemid'");
+	if ($result != NULL) {
+		$response["status"] = "success";
+		$response["message"] = "Item deleted successfully";
+		$response["id"] = $result;
+		echoResponse(200, $response);
+	} else {
+		$response["status"] = "error";
+		$response["message"] = "Failed to delete item. Please try again";
+		echoResponse(201, $response);
+	}            
+});
+
 ?>

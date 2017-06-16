@@ -1,0 +1,93 @@
+<div class="well">
+	<h4>Order Bill</h4></div>
+<div class="row">
+	<div class="col-sm-3">
+
+		<form name="customerForm" class="form-horizontal" role="form">
+
+			<div class="row">
+				<div class="form-group">
+					<p class="col-sm-5 control-label no-padding-right" for="custname">Customer Name: </p>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" placeholder="Customer Name" name="custname" ng-model="order.custname" focus>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group">
+					<p class="col-sm-5 control-label no-padding-right " for="tableno">Table No:</p>
+					<div class="col-sm-7">
+						<select ng-init="order.tableno = 1" ng-model="order.tableno" ng-options="x for x in [1,2,3,4,5,6,7,8,9,10]" style="color:black" class="form-control">
+						</select>
+					</div>
+				</div>
+			</div>
+
+			
+		</form>
+
+
+
+
+
+
+
+	</div>
+
+	<div class="col-sm-3">
+		<form name="orderForm" class="form-horizontal" role="form">
+		<div class="row">
+				<div class="form-group">
+					<p class="col-sm-5 control-label no-padding-right" for="type">Type:</p>
+					<div class="col-sm-7">
+						<select ng-init="order.type = types[0].type" ng-model="order.type" ng-options="x.type for x in types" style="color:black" class="form-control">
+						</select>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+	
+	
+	
+	
+	
+	<div class="col-sm-6" id="orderPreview">
+		
+		<div class="well">
+	<h4> Bill Preview</h4></div>
+		
+			<p><span class="text-left">Customer Name: <strong>{{order.custname | uppercase  }}</strong></span>
+			<span class="pull-right">Table Number: <strong>{{order.tableno | titleCase}}</strong></span></p>
+		
+		<table class="table table-responsive table-condensed" id ="filtertable">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Rate</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+	
+    </tbody>
+  </table>
+	</div>
+</div>

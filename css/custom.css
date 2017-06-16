@@ -23,6 +23,7 @@ body{
 	font-family: 'Raleway', sans-serif;
 	color: black;
 }
+
 #filtertable{
 	background-color: aliceblue;
 }
@@ -35,4 +36,11 @@ body{
 	color: black;
 	padding: 10px;
 	font-size: 20px;
+}
+.errorMessage {
+	color: red;
+}
+
+h5, p {
+	color: antiquewhite;
 }

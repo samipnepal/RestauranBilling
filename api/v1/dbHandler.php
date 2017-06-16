@@ -18,6 +18,11 @@ class DbHandler {
         return $result = $r->fetch_assoc();    
     }
 	
+	public function deleteRecord($query) {
+        $r = $this->conn->query($query) or die($this->conn->error.__LINE__);
+        return $result = $r;    
+    }
+	
 	public function getMultipleRecords($query) {
         $r = $this->conn->query($query) or die($this->conn->error.__LINE__);
         $arr = array();

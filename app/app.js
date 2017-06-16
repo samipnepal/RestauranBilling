@@ -49,9 +49,11 @@ app.config(['$routeProvider',
             templateUrl:'directives/itemlist/itemlist.html',
             controller: 'itemCtrl'
         })
-            .otherwise({
-                redirectTo: '/login'
-            });
+		.when('/orderbill', {
+            title: 'Order Bill',
+            templateUrl:'directives/orderbill/orderbill.html',
+            controller: 'billCtrl'
+        })
   }])
     .run(function ($rootScope, $location, Data) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
@@ -64,7 +66,7 @@ app.config(['$routeProvider',
                     $rootScope.email = results.email;
                     var nextUrl = next.$$route.originalPath;
                     if (nextUrl == '/signup' || nextUrl == '/login') {
-                        $location.path("/dashboard");
+                        $location.path("/orderbill");
                     } else if(nextUrl == '/userprofile') {
                         $rootScope.$emit("getProfileMethod", $rootScope.email);
                     }
