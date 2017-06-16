@@ -46,7 +46,8 @@
 					</div>
 				</div>
 			</div>
-
+			<div class="form-group">
+				<button class="btn btn-primary pull-right" ng-click="addItem(order);">Add</button></div>
 		</form>
 	</div>
 	
@@ -54,7 +55,7 @@
 	
 	
 	
-	<div class="col-sm-6" id="orderPreview">
+	<div class="col-sm-6" id="orderPreview" >
 		
 		<div class="well">
 	<h4> Bill Preview</h4></div>
@@ -73,7 +74,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="x in order.items">
+      <tr ng-repeat="x in billItems">
         <td>{{x.item}}</td>
 		<td>{{x.unit}}</td>
         <td>{{x.rate}}</td>
