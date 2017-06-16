@@ -59,34 +59,27 @@
 		<div class="well">
 	<h4> Bill Preview</h4></div>
 		
-			<p><span class="text-left">Customer Name: <strong>{{order.custname | uppercase  }}</strong></span>
-			<span class="pull-right">Table Number: <strong>{{order.tableno | titleCase}}</strong></span></p>
+			<p><span class="text-left">Customer Name: <strong>{{order.custname | uppercase}}</strong></span>
+			<span class="pull-right">Table Number: <strong>{{order.tableno}}</strong></span></p>
 		
 		<table class="table table-responsive table-condensed" id ="filtertable">
     <thead>
       <tr>
         <th>Item</th>
+		  <th>Unit</th>
         <th>Rate</th>
+		<th>Quantity</th>
         <th>Total</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+      <tr ng-repeat="x in order.items">
+        <td>{{x.item}}</td>
+		<td>{{x.unit}}</td>
+        <td>{{x.rate}}</td>
+		<td>{{x.quantity}}</td>
+        <td>{{x.rate*x.quantity}}</td>
       </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-	
     </tbody>
   </table>
 	</div>
