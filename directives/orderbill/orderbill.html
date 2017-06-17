@@ -1,16 +1,17 @@
 <div class="well">
-	<h4>Order Bill</h4></div>
+	Order Bill</div>
 <div class="row">
 	<div class="col-sm-6">
 	<div class="col-sm-6">
-
+<div class="well" id="billPreviewWell">Table Detail</div>
 		<form name="customerForm" class="form-horizontal" role="form">
 
 			<div class="row">
 				<div class="form-group">
 					<p class="col-sm-5 control-label no-padding-right" for="custname">Customer Name: </p>
 					<div class="col-sm-7">
-						<input type="text" class="form-control" placeholder="Customer Name" name="custname" ng-model="order.custname" focus>
+						<input type="text" class="form-control" placeholder="Customer Name" name="custname" ng-model="bill.custname" ng-maxlength="25" focus>
+                        <span class="errorMessage" ng-show="customerForm.custname.$invalid" class="help-inline">Name is too long.</span>
 					</div>
 				</div>
 			</div>
@@ -19,7 +20,17 @@
 				<div class="form-group">
 					<p class="col-sm-5 control-label no-padding-right " for="tableno">Table No:</p>
 					<div class="col-sm-7">
-						<select ng-init="order.tableno = 1" ng-model="order.tableno" ng-options="x for x in [1,2,3,4,5,6,7,8,9,10]" style="color:black" class="form-control">
+						<select ng-init="bill.tableno = 1" ng-model="bill.tableno" ng-options="x for x in [1,2,3,4,5,6,7,8,9,10]" style="color:black" class="form-control">
+						</select>
+					</div>
+				</div>
+			</div>
+            
+            <div class="row">
+				<div class="form-group">
+					<p class="col-sm-5 control-label no-padding-right " for="discount">Discount:</p>
+					<div class="col-sm-7">
+						<select name="discount" ng-init="bill.discount = 0" ng-model="bill.discount" ng-options="x for x in [0,5,10,15,20,25,30,35,40,50]" style="color:black" class="form-control" ng-change="calculateDiscount();">
 						</select>
 					</div>
 				</div>
@@ -37,19 +48,22 @@
 	</div>
 
 	<div class="col-sm-6">
+        <div class="well" id="billPreviewWell">Add Item</div>
 		<form name="orderForm" class="form-horizontal" role="form">
 		<div class="row">
 				<div class="form-group">
 					<p class="col-sm-5 control-label no-padding-right" for="type">Type:</p>
 					<div class="col-sm-7">
-						<select ng-init="order.type = types[0].type" ng-model="order.type" ng-options="x.type for x in types" style="color:black" class="form-control">
+						<select ng-model="order.type" ng-options="x.type for x in types" style="color:black" class="form-control" ng-change="getItemsByType(order.type); order.item='' " >
 						</select>
 					</div>
 				</div>
 			<div class="form-group">
 					<p class="col-sm-5 control-label no-padding-right" for="item">Item: </p>
 					<div class="col-sm-7">
-						<input type="text" class="form-control" placeholder="Item" name="item" ng-model="order.item">
+                        <select ng-model="order.item" style="color:black" class="form-control">
+                            <option ng-repeat="x in itemTypes | orderBy : 'itemname'" >{{x.itemname}} </option>
+						</select>
 					</div>
 				</div>
 			
@@ -62,45 +76,70 @@
 			</div>
 			
 		</form>
+        <div class="form-group text-center">
+				<button class="btn btn-primary " ng-click="addItem(order);" data-ng-disabled="order.type==='' || order.item==='' || order.quantity<1">Add Item</button></div>
 	</div>
-	
-		<div class="form-group text-center">
-				<button class="btn btn-primary " ng-click="addItem(order);">Add Item</button></div>
-		
+	 
+        <div id="print" class="text-center">
+		<button class="btn btn-primary " ng-click="printBill();" data-ng-disabled = "bill.items.length<1"><span class="glyphicon glyphicon-print"></span> Print</button>
+        
+        <button class="btn btn-danger " ng-click="preview();" data-ng-disabled = "bill.items.length<1" ><span class="glyphicon glyphicon-new-window"></span>  Preview</button>
+        
+        <button class="btn btn-info " ng-click="clear();" data-ng-disabled = "bill.items.length<1" ><i class="fa fa-recycle" aria-hidden="true"></i> Clear</button>
+            </div>
+
 </div>
 	
 	
 	
 	<div class="col-sm-6" id="orderPreview" >
 		
-		<div class="well">
-	<h4> Bill Preview</h4></div>
+		<div class="well" id="billPreviewWell">
+	 Bill Preview</div>
 		<div id="billPreview">
+            <div id="restaurantHeader" class="text-center">
+                <p><span id="title"><strong>First Kitchen</strong></span><br>
+                <span id="subTitle">Family Restaurant</span><br>
+                    <span id="address">Basundhara Chwok, Kathmandu, Nepal </span><br><span id="phone">+977-1-4364404</span></p>
+                
+            
+            </div>
 			<div id="orderTitle">
-			<span class="text-left">Customer Name: <strong>{{order.custname | uppercase}}</strong></span>
-			<span class="pull-right">Table Number: <strong>{{order.tableno}}</strong></span>
+			<span class="text-left">Customer Name: <strong>{{bill.custname | uppercase}} </strong></span>
+                <br>
+            <span class="text-left">Order Date: {{ today | date }}</span>
+			<span class="pull-right">Table Number: <strong>{{bill.tableno}}</strong></span>
 		</div>
 		<table class="table table-responsive table-condensed" id ="filtertable">
     <thead>
-      <tr>
+      <tr >
         <th>Item</th>
-		<th>Unit</th>
         <th>Rate</th>
 		<th>Quantity</th>
         <th>Total</th>
+        <th ng-show="showEdit">Edit</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="x in bill.items">
+      <tr ng-repeat="x in bill.items" >
         <td>{{x.item}}</td>
-		<td>{{x.unit}}</td>
         <td>{{x.rate}}</td>
-		<td>{{x.quantity}}</td>
-        <td>{{x.rate*x.quantity}}</td>
+		<td>{{x.quantity}} {{x.unit}}</td>
+        <td  >{{x.rate*x.quantity}}</td>
+          <td  ng-show="showEdit"><a href="" ng-click="removeItem(x);">
+          <span class="glyphicon glyphicon-remove"></span>
+        </a></td>
       </tr>
     </tbody>
   </table>
-			
+			<div id="orderTitle">
+			<span class="text-left" ng-show="bill.discount>0">Discount <strong>{{bill.discount }}%</strong></span>
+			<span class="pull-right" ng-show="bill.discount>0">Total: <strong>{{bill.total}}</strong></span>
+                <div class="clearfix"></div>
+            <span class="pull-right" ng-show="bill.discount>0">Discount Amount: <strong>{{bill.discountAmount}}</strong></span>
+                 <div class="clearfix"></div>
+            <span class="pull-right">Grand Total: <strong>{{bill.gtotal}}</strong></span>
+		</div>
 		</div>
 	</div>
 </div>

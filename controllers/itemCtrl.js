@@ -25,6 +25,8 @@ app.controller('itemCtrl', function ($scope, $http, $timeout, $location, $rootSc
             Data.toast(results);
         });
     }
+    
+    
 	Data.get('listItems').then(function (results) {
 		$scope.list = results;
 		$scope.currentPage = 1; //current page

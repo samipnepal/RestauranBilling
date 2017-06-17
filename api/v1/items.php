@@ -58,4 +58,13 @@ $app->post('/deleteItem', function() use ($app) {
 	}            
 });
 
+$app->post('/getItemsByType', function() use ($app) {
+    $response = array();
+    $r = json_decode($app->request->getBody());
+    $db = new DbHandler();
+    $type = $r->Type;
+	 $result = $db->getMultipleRecords("select itemid,itemname,rate,unit from menu  where type='$type'");
+    echoResponse(200, $result);         
+});
+
 ?>
