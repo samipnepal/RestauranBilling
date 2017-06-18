@@ -1,7 +1,8 @@
 app.controller('billCtrl', function ($scope, $http, $timeout, $location, $rootScope, $route,Data) {
-	$scope.order = {itemid:'',custname:'',type:'',unit:'',item:'',rate:'',quantity:1};
+	$scope.order = {itemid:'',type:'',unit:'',item:'',rate:'',quantity:1};
 	$scope.bill= {};
     $scope.tableno= 0;
+    $scope.bill.custname= "";
     $scope.bill.discount= 0;
     $scope.bill.discountAmount= 0;
     $scope.bill.total= 0;
@@ -9,12 +10,14 @@ app.controller('billCtrl', function ($scope, $http, $timeout, $location, $rootSc
 	$scope.bill.items = [];
     $scope.today = new Date();
     $scope.showEdit = true;
+    $scope.found = false;
 	
 Data.get("getTypes").then(function(results) {
 	$scope.types = results;
 });
 
 	$scope.addItem= function(order) {
+        $scope.found=false;
         $scope.itemTypes.forEach(function(obj){
             if(obj.itemname === order.item.trim()){
                 order.rate = obj.rate;
@@ -22,6 +25,7 @@ Data.get("getTypes").then(function(results) {
                 order.itemid = obj.itemid;
             }
         });
+        
         $scope.bill.total = $scope.bill.total + order.rate * order.quantity;
         if($scope.bill.discount>0){
             $scope.bill.discountAmount = ($scope.bill.discount/100)*$scope.bill.total;
@@ -29,8 +33,20 @@ Data.get("getTypes").then(function(results) {
         } else {
              $scope.bill.gtotal =  $scope.bill.total;
         }
-        $scope.bill.items.push(order);
-        $scope.order = {custname:'',tableno:'',type:'',unit:'',item:'',rate:'',quantity:1};
+        if($scope.bill.items.length===0){
+            $scope.bill.items.push(order);
+        }else {
+            $scope.bill.items.forEach(function(obj){
+               if(order.itemid === obj.itemid) {
+                   $scope.bill.items[$scope.bill.items.indexOf(obj)].quantity = $scope.bill.items[$scope.bill.items.indexOf(obj)].quantity + order.quantity;
+                   $scope.found=true;
+               }
+            });
+            if(!$scope.found){
+                $scope.bill.items.push(order);
+            }
+        }
+        $scope.order = {tableno:'',type:'',unit:'',item:'',rate:'',quantity:1};
 	}
     
     $scope.calculateDiscount = function() {

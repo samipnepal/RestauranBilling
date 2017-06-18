@@ -84,6 +84,8 @@
 		<button class="btn btn-primary " ng-click="printBill();" data-ng-disabled = "bill.items.length<1"><span class="glyphicon glyphicon-print"></span> Print</button>
         
         <button class="btn btn-danger " ng-click="preview();" data-ng-disabled = "bill.items.length<1" ><span class="glyphicon glyphicon-new-window"></span>  Preview</button>
+            
+        <button class="btn btn-success " ng-click="saveOrder();" data-ng-disabled = "bill.items.length<1" ><span class="	glyphicon glyphicon-save"></span>  Save</button>
         
         <button class="btn btn-info " ng-click="clear();" data-ng-disabled = "bill.items.length<1" ><i class="fa fa-recycle" aria-hidden="true"></i> Clear</button>
             </div>
@@ -107,7 +109,7 @@
 			<div id="orderTitle">
 			<span class="text-left">Customer Name: <strong>{{bill.custname | uppercase}} </strong></span>
                 <br>
-            <span class="text-left">Order Date: {{ today | date }}</span>
+            <span class="text-left">Order Date: <strong>{{ today | date }}</strong></span>
 			<span class="pull-right">Table Number: <strong>{{bill.tableno}}</strong></span>
 		</div>
 		<table class="table table-responsive table-condensed" id ="filtertable">
@@ -123,9 +125,9 @@
     <tbody>
       <tr ng-repeat="x in bill.items" >
         <td>{{x.item}}</td>
-        <td>{{x.rate}}</td>
+        <td>Rs. {{x.rate}}</td>
 		<td>{{x.quantity}} {{x.unit}}</td>
-        <td  >{{x.rate*x.quantity}}</td>
+        <td>Rs. {{x.rate*x.quantity}}</td>
           <td  ng-show="showEdit"><a href="" ng-click="removeItem(x);">
           <span class="glyphicon glyphicon-remove"></span>
         </a></td>
@@ -133,12 +135,12 @@
     </tbody>
   </table>
 			<div id="orderTitle">
-			<span class="text-left" ng-show="bill.discount>0">Discount <strong>{{bill.discount }}%</strong></span>
-			<span class="pull-right" ng-show="bill.discount>0">Total: <strong>{{bill.total}}</strong></span>
+			<span class="text-left" ng-show="bill.discount>0">Discount <strong>Rs. {{bill.discount }}%</strong></span>
+			<span class="pull-right" ng-show="bill.discount>0">Total: <strong> Rs. {{bill.total}}</strong></span>
                 <div class="clearfix"></div>
-            <span class="pull-right" ng-show="bill.discount>0">Discount Amount: <strong>{{bill.discountAmount}}</strong></span>
+            <span class="pull-right" ng-show="bill.discount>0">Discount Amount: <strong>Rs. {{bill.discountAmount}}</strong></span>
                  <div class="clearfix"></div>
-            <span class="pull-right">Grand Total: <strong>{{bill.gtotal}}</strong></span>
+            <span class="pull-right">Grand Total: <strong>Rs. {{bill.gtotal}}</strong></span>
 		</div>
 		</div>
 	</div>
