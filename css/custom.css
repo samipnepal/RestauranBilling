@@ -53,10 +53,6 @@ h5, p {
 	border-top-left-radius: 5px;
 	padding: 20px;
 }
-
-#billPreview table{
-	border: none;
-}
 #orderTitle {
     margin: 5px;
     margin-bottom: 10px;
@@ -68,6 +64,6 @@ h5, p {
 #restaurantHeader #title {
     font-size: 40px;
 }
-##restaurantHeader #title, #subTitle{
+#restaurantHeader #title, #subTitle{
     margin: 0px;
 }

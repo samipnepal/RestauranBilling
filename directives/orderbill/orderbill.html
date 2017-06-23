@@ -10,7 +10,7 @@
 				<div class="form-group">
 					<p class="col-sm-5 control-label no-padding-right" for="custname">Customer Name: </p>
 					<div class="col-sm-7">
-						<input type="text" class="form-control" placeholder="Customer Name" name="custname" ng-model="bill.custname" ng-maxlength="25" focus>
+						<input type="text" class="form-control" placeholder="Customer Name" name="custname" ng-model="bill.custname" ng-maxlength="25" focus maxlength="25">
                         <span class="errorMessage" ng-show="customerForm.custname.$invalid" class="help-inline">Name is too long.</span>
 					</div>
 				</div>
@@ -30,17 +30,22 @@
 				<div class="form-group">
 					<p class="col-sm-5 control-label no-padding-right " for="discount">Discount:</p>
 					<div class="col-sm-7">
-						<select name="discount" ng-init="bill.discount = 0" ng-model="bill.discount" ng-options="x for x in [0,5,10,15,20,25,30,35,40,50]" style="color:black" class="form-control" ng-change="calculateDiscount();">
+						<select name="discount" ng-init="bill.discount = 0" ng-model="bill.discount" ng-options="x for x in [0,5,10,15,20,25,30,35,40,50]" style="color:black" class="form-control" ng-change="calculateBill();">
 						</select>
 					</div>
 				</div>
 			</div>
-
+        
+            <div class="row" style="color:white">
+				<div >
+            <label >Service Charge: <input class="btn btn-primary" type="checkbox" ng-model="isServiceChecked" ng-change="calculateBill();"></label>
+                
+                <label class="pull-right">Vat: <input class="btn btn-primary" type="checkbox" ng-model="isVatChecked" ng-change="calculateBill();"></label>
+                </div>
+            
+            </div>
 			
 		</form>
-
-
-
 
 
 
@@ -61,11 +66,17 @@
 			<div class="form-group">
 					<p class="col-sm-5 control-label no-padding-right" for="item">Item: </p>
 					<div class="col-sm-7">
-                        <select ng-model="order.item" style="color:black" class="form-control">
-                            <option ng-repeat="x in itemTypes | orderBy : 'itemname'" >{{x.itemname}} </option>
-						</select>
+                        <input type="text" class="form-control" ng-model="order.item" placeholder="Search Item" typeahead=" c.itemname for c in itemTypes | filter:$viewValue | limitTo:10" typeahead-min-length='1' typeahead-on-select='onSelectPart($item, $model, $label)' typeahead-template-url="customTemplate.html" ng-disabled="order.type===''">
+        <i class="icon-search nav-search-icon"></i>
 					</div>
 				</div>
+            
+            <script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+      <i>({{match.model.rate}})</i>
+  </a>
+</script>
 			
 			<div class="form-group">
 					<p class="col-sm-5 control-label no-padding-right" for="quantity">Quantity: </p>
@@ -79,7 +90,7 @@
         <div class="form-group text-center">
 				<button class="btn btn-primary " ng-click="addItem(order);" data-ng-disabled="order.type==='' || order.item==='' || order.quantity<1">Add Item</button></div>
 	</div>
-	 
+	 <div class="clearfix"></div>
         <div id="print" class="text-center">
 		<button class="btn btn-primary " ng-click="printBill();" data-ng-disabled = "bill.items.length<1"><span class="glyphicon glyphicon-print"></span> Print</button>
         
@@ -107,12 +118,16 @@
             
             </div>
 			<div id="orderTitle">
+                <span class="pull-right">Table Number: <strong>{{bill.tableno}}</strong></span>
 			<span class="text-left">Customer Name: <strong>{{bill.custname | uppercase}} </strong></span>
                 <br>
             <span class="text-left">Order Date: <strong>{{ today | date }}</strong></span>
-			<span class="pull-right">Table Number: <strong>{{bill.tableno}}</strong></span>
+			
+                <span class="pull-right">Time: <strong>{{ today | date : "hh:mm:ss" }}</strong></span>
+                
+                
 		</div>
-		<table class="table table-responsive table-condensed" id ="filtertable">
+		<table class="table table-responsive table-condensed table-bordered" id ="filtertable">
     <thead>
       <tr >
         <th>Item</th>
@@ -134,14 +149,41 @@
       </tr>
     </tbody>
   </table>
-			<div id="orderTitle">
-			<span class="text-left" ng-show="bill.discount>0">Discount <strong>Rs. {{bill.discount }}%</strong></span>
-			<span class="pull-right" ng-show="bill.discount>0">Total: <strong> Rs. {{bill.total}}</strong></span>
-                <div class="clearfix"></div>
-            <span class="pull-right" ng-show="bill.discount>0">Discount Amount: <strong>Rs. {{bill.discountAmount}}</strong></span>
-                 <div class="clearfix"></div>
-            <span class="pull-right">Grand Total: <strong>Rs. {{bill.gtotal}}</strong></span>
-		</div>
+            
+<table class="table table-responsive table-condensed" id="billCalculation" style="border-collapse: collapse;" >
+
+    <tr ng-show="bill.discount>0 || isVatChecked || isServiceChecked">
+        <td>Sub-Total</td>
+          <td></td>
+        <td class="text-right"><strong> Rs. {{bill.total}}</strong></td>
+      </tr>
+    
+    <tr ng-show="isVatChecked">
+        <td>Vat</td>
+          <td>+15%</td>
+        <td class="text-right"><strong> Rs. {{bill.vat}}</strong></td>
+      </tr>
+    
+     <tr ng-show="isServiceChecked">
+        <td>Service Tax </td>
+          <td>+10%</td>
+        <td class="text-right"><strong> Rs. {{bill.serviceTax}}</strong></td>
+      </tr>
+    
+     <tr ng-show="bill.discount>0">
+        <td>Discount</td>
+          <td>-{{bill.discount }}%</td>
+        <td class="text-right"><strong>Rs. {{bill.discountAmount}}</strong></td>
+      </tr>
+    
+     <tr>
+        <td>Total Amount</td>
+         <td></td>
+        <td class="text-right"><strong>Rs. {{bill.gtotal}}</strong></td>
+      </tr>
+    
+  </table>
+            
 		</div>
 	</div>
 </div>

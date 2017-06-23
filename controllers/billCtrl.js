@@ -3,6 +3,8 @@ app.controller('billCtrl', function ($scope, $http, $timeout, $location, $rootSc
 	$scope.bill= {};
     $scope.tableno= 0;
     $scope.bill.custname= "";
+    $scope.bill.vat= 0;
+    $scope.bill.serviceTax= 0;
     $scope.bill.discount= 0;
     $scope.bill.discountAmount= 0;
     $scope.bill.total= 0;
@@ -10,14 +12,16 @@ app.controller('billCtrl', function ($scope, $http, $timeout, $location, $rootSc
 	$scope.bill.items = [];
     $scope.today = new Date();
     $scope.showEdit = true;
-    $scope.found = false;
+    $scope.isVatChecked= true;
+    $scope.isServiceChecked = true;
 	
 Data.get("getTypes").then(function(results) {
 	$scope.types = results;
 });
 
 	$scope.addItem= function(order) {
-        $scope.found=false;
+        $scope.isItemFound=false;
+        console.log(order);
         $scope.itemTypes.forEach(function(obj){
             if(obj.itemname === order.item.trim()){
                 order.rate = obj.rate;
@@ -25,44 +29,47 @@ Data.get("getTypes").then(function(results) {
                 order.itemid = obj.itemid;
             }
         });
-        
-        $scope.bill.total = $scope.bill.total + order.rate * order.quantity;
-        if($scope.bill.discount>0){
-            $scope.bill.discountAmount = ($scope.bill.discount/100)*$scope.bill.total;
-             $scope.bill.gtotal = $scope.bill.total - $scope.bill.discountAmount;
-        } else {
-             $scope.bill.gtotal =  $scope.bill.total;
-        }
         if($scope.bill.items.length===0){
             $scope.bill.items.push(order);
         }else {
             $scope.bill.items.forEach(function(obj){
                if(order.itemid === obj.itemid) {
                    $scope.bill.items[$scope.bill.items.indexOf(obj)].quantity = $scope.bill.items[$scope.bill.items.indexOf(obj)].quantity + order.quantity;
-                   $scope.found=true;
+                   $scope.isItemFound=true;
                }
             });
-            if(!$scope.found){
+            if(!$scope.isItemFound){
                 $scope.bill.items.push(order);
             }
         }
+        $scope.calculateBill();
         $scope.order = {tableno:'',type:'',unit:'',item:'',rate:'',quantity:1};
 	}
     
-    $scope.calculateDiscount = function() {
+    $scope.calculateBill=function(){
+        $scope.bill.total = 0;
+        $scope.bill.vat= 0;
+        $scope.bill.serviceTax= 0;
+        $scope.bill.discountAmount= 0;
+        $scope.bill.gtotal= 0;
+        $scope.bill.items.forEach(function(obj){
+               $scope.bill.total =$scope.bill.total+ obj.quantity * obj.rate;
+            });
         if($scope.bill.discount>0){
             $scope.bill.discountAmount = ($scope.bill.discount/100)*$scope.bill.total;
-             $scope.bill.gtotal = $scope.bill.total - $scope.bill.discountAmount;
-        }else {
-            $scope.bill.discountAmount = 0;
-             $scope.bill.gtotal = $scope.bill.total;
         }
+        if($scope.isServiceChecked){
+            $scope.bill.serviceTax = $scope.bill.serviceTax + 0.10 * $scope.bill.total;
+        }
+        if($scope.isVatChecked) {
+            $scope.bill.vat = $scope.bill.vat + 0.15 * $scope.bill.total;
+        }
+        $scope.bill.gtotal = $scope.bill.total +$scope.bill.serviceTax + $scope.bill.vat - $scope.bill.discountAmount;
     }
 
     $scope.removeItem = function(item) {
-        $scope.bill.total = $scope.bill.total - item.rate * item.quantity;
-        $scope.calculateDiscount();
         $scope.bill.items.splice($scope.bill.items.indexOf(item),1);
+        $scope.calculateBill();
     }
     
     $scope.clear = function() {
@@ -72,6 +79,8 @@ Data.get("getTypes").then(function(results) {
         $scope.bill.discount= 0;
         $scope.bill.discountAmount= 0;
         $scope.bill.total= 0;
+        $scope.bill.vat= 0;
+        $scope.bill.serviceTax= 0;
         $scope.bill.gtotal= 0;
         $scope.bill.items = [];
     }

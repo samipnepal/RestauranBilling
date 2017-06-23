@@ -1,6 +1,6 @@
 app.controller('itemCtrl', function ($scope, $http, $timeout, $location, $rootScope, $window, Data) {
 	$scope.units = ["Plate", "Cup", "Nos"];
-    $scope.types = ["Beverage", "Starter", "Main Course", "Soups", "Thali", "Pizzas", "Burgers", "Meal", "Chinese","Snacks"];
+    $scope.types = ["Beverage", "Food"];
 
 	$scope.item = {itemname: '', rate: '', unit: '', type: ''}
 
