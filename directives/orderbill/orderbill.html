@@ -35,14 +35,29 @@
 					</div>
 				</div>
 			</div>
-        
+
             <div class="row" style="color:white">
-				<div >
-            <label >Service Charge: <input class="btn btn-primary" type="checkbox" ng-model="isServiceChecked" ng-change="calculateBill();"></label>
-                
-                <label class="pull-right">Vat: <input class="btn btn-primary" type="checkbox" ng-model="isVatChecked" ng-change="calculateBill();"></label>
-                </div>
+                <div class="form-group">
+					
+					<div class="col-sm-12">
+             <p class="col-sm-5 control-label no-padding-right " for="serviceTax">Service Tax:</p>
+                        <div class="material-switch pull-right">
+                            <input id="serviceTax" name="serviceTaxOption" type="checkbox" ng-model="isServiceChecked" ng-change="calculateBill();"/>
+                            <label for="serviceTax" class="label-success"></label>
+                        </div>
+                    </div></div>
+            </div>
             
+            <div class="row" style="color:white">
+                
+                <div class="form-group">
+					  
+					<div class="col-sm-12">
+            <p class="col-sm-5 control-label no-padding-right " for="vat">Vat:</p>
+                        <div class="material-switch pull-right">
+                            <input id="vat" name="vatOption" type="checkbox" ng-model="isVatChecked" ng-change="calculateBill();"/>
+                            <label for="vat" class="label-success"></label>
+                        </div></div></div>
             </div>
 			
 		</form>
